@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+
+int main(void) {
+
+   int N, K;
+   cin >> N >> K;
+   int C[N];
+   for(int i = 0; i < N; i++){
+      cin >> C[i];
+   }
+   
+   // Sort the costs
+   // Have used simple bubble sort for simplicity. Better ones can be used
+   for(int i=0; i<N; i++) {
+       for(int j=i+1; j<N; j++) {           
+           if (C[i] > C[j]) {
+               int temp = C[i];
+               C[i] = C[j];
+               C[j] = temp;               
+           }               
+       }
+   }
+     
+   // Compute how many times the people can be used to buy all the flowers
+   int iterations = 0;
+   iterations = N/K;
+   if(N%K != 0) {
+       iterations += 1;
+   }
+         
+   // Compute the greedy result
+   int result=0;    
+   N -= 1;
+   int nTemp = N;
+   for(int i=1; i<=iterations; i++) {
+       int kTemp = K;       
+       while(nTemp >= 0 && kTemp-- > 0) {
+           result += i*C[N--];
+           nTemp = N;
+       }       
+   }
+                  
+   cout << result << "\n";   
+   return 0;
+}
