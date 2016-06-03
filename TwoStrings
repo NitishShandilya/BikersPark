@@ -1,0 +1,19 @@
+from collections import Counter
+
+def check(firstHash, secondHash):    
+    for i in firstHash.keys():
+        for j in secondHash.keys():
+            if i == j:
+                return "YES"
+        
+    return "NO"
+          
+        
+testCases = raw_input()
+
+for testCase in range(0,int(testCases)):
+    firstString = raw_input()
+    secondString = raw_input()
+    firstHash = Counter(firstString)
+    secondHash = Counter(secondString)
+    print check(firstHash,secondHash)
