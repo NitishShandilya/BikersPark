@@ -1,0 +1,17 @@
+from collections import Counter
+ 
+def sherlock(S):    
+    charOccurencesCount = Counter(Counter(S).values())
+    
+    if len(charOccurencesCount) == 1:
+        return "YES"
+ 
+    if len(charOccurencesCount) == 2:
+        for value in charOccurencesCount.values():             
+            if value == 1:
+                return "YES"
+ 
+    return "NO"
+ 
+S = raw_input()
+print sherlock(S)    
