@@ -1,0 +1,27 @@
+from collections import Counter
+
+class MakeAnagram:
+    def __init__(self, firstString, secondString):
+        self.firstHash = Counter(firstString)
+        self.secondHash = Counter(secondString)
+
+    def findMinDeletions(self):
+        count = 0 
+        for key in self.firstHash.keys():
+            if self.secondHash.has_key(key):
+                count += max(0, self.firstHash[key] - self.secondHash[key])
+            else:
+                count += self.firstHash[key]
+         
+        for key in self.secondHash.keys():
+            if self.firstHash.has_key(key):
+                count += max(0, self.secondHash[key] - self.firstHash[key])
+            else:
+                count += self.secondHash[key]
+      
+        return count
+
+firstString = raw_input()
+secondString = raw_input()
+make = MakeAnagram(firstString, secondString)
+print make.findMinDeletions()
