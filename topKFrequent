@@ -1,0 +1,72 @@
+#Solution to the leetcode problem at https://leetcode.com/problems/top-k-frequent-elements/ with O(klogn) time complexity
+class Structure:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+    def getKey(self):
+        return self.key
+    def getValue(self):
+        return self.value
+
+class Solution(object):
+
+    def extractMax(self):
+        if self.inputSize == 0:
+            #print "The array is empty"
+            return
+        #print "The max element is " + str(self.input[0])
+        self.returnList.append(self.input[0].getKey())
+        self.input[0] = self.input[self.inputSize-1]
+        self.input.pop(self.inputSize - 1)
+        self.inputSize = len(self.input)
+        self.maxHeapify(0)
+
+    def maxHeapify(self, i):
+        largest = i
+        left = 2 * i + 1
+        right = 2 * i + 2
+
+        if left < self.inputSize and self.input[left].getValue() > self.input[largest].getValue():
+            largest = left
+        if right < self.inputSize and self.input[right].getValue() > self.input[largest].getValue():
+            largest = right
+        if largest != i:
+            self.input[i], self.input[largest] = self.input[largest], self.input[i]
+            self.maxHeapify(largest)
+
+    def topKFrequent(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        numHash = {}
+        for num in nums:
+            if num in numHash:
+                numHash[num] += 1
+            else:
+                numHash[num] = 1
+
+        self.input = []
+        for num in numHash.keys():
+            structure = Structure(num, numHash[num])
+            self.input.append(structure)
+         
+        self.k = k
+        self.inputSize = len(self.input)
+        iterationStart = self.inputSize//2
+        iterationEnd = -1
+        steps = -1
+        for i in range(iterationStart, iterationEnd, steps):
+            self.maxHeapify(i)
+
+        self.returnList = []
+        for j in range(self.k):
+            self.extractMax()
+
+        return self.returnList
+
+A = [1,1,1,2,2,3]
+K = 2
+s = Solution()
+print s.topKFrequent(A, K)
