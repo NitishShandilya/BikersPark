@@ -1,3 +1,4 @@
+import sys
 """
 Given a string, a partitioning of the string is a palindrome partitioning if every substring of the partition is a palindrome.
 For example, “aba|b|bbabb|a|b|aba” is a palindrome partitioning of “ababbbabbababa”.
@@ -8,7 +9,6 @@ If a string of length n containing all different characters, then minimum n-1 cu
 Time Complexity is n^2.
 """
 
-import sys
 class minimumPalindromePartition(object):
     def __init__(self, inputStr):
         self.arr = list(inputStr)
