@@ -14,7 +14,7 @@ class MaximumSumSubarray(object):
             max_curr = max(self.arr[i]+max_curr, self.arr[i])
             max_sum = max(max_sum, max_curr)
         return max_sum
-
-arr = [-2,3,2,-1]
+#Test
+arr = [-2,-3,-2,-1]
 maxSumSubarray = MaximumSumSubarray(arr)
 print maxSumSubarray.findMaxSumKadane()
